@@ -1,0 +1,377 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background: linear-gradient(to bottom, #8B0000, #800080);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chat Container */
+.chat-container {
+    width: 100%;
+    max-width: 500px;
+    height: 95vh;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Messages Area */
+.messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #1a1a1a;
+    background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.1'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Message Bubbles */
+.message {
+    max-width: 70%;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    animation: messageIn 0.3s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.message.sent {
+    margin-left: auto;
+    background: #8B0000;
+    color: #fff;
+    border-bottom-right-radius: 5px;
+}
+
+.message.received {
+    margin-right: auto;
+    background: #800080;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+}
+
+.message .profile-pic {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #FFD700;
+}
+
+.message .content {
+    flex: 1;
+}
+
+.message .username {
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #FFD700;
+    margin-bottom: 4px;
+}
+
+.message .text {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Input Area */
+.input-area {
+    padding: 15px 20px;
+    background: linear-gradient(to right, #8B0000, #800080);
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+input[type="text"]::placeholder {
+    color: #666;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    color: #FFD700;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background: rgba(255, 215, 0, 0.1);
+    transform: scale(1.1);
+}
+
+/* Profile Modal */
+#profile-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to bottom, #8B0000, #800080);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    z-index: 1000;
+}
+
+#profile-modal img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 15px auto;
+    display: block;
+    border: 3px solid #FFD700;
+}
+
+#profile-modal input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+#profile-modal input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#profile-modal button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #FFD700;
+    color: #8B0000;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+#profile-modal button:hover {
+    background: #ffd900;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes messageIn {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scrollbar Styling */
+.messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.3);
+    border-radius: 3px;
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.5);
+}
+
+/* Online Users Counter */
+.online-users {
+    padding: 10px 15px;
+    background: rgba(139, 0, 0, 0.1);
+    color: #FFD700;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    color: #FFD700;
+    font-style: italic;
+    background: rgba(0, 0, 0, 0.2);
+    min-height: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .chat-container {
+        height: 100vh;
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    body {
+        padding: 0;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+}
+
+/* Add styles for audio recording */
+.audio-status {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#audio-btn {
+    transition: background-color 0.3s;
+}
+
+#audio-btn.recording {
+    background-color: red;
+}
+
+/* Improve audio player styling */
+.message audio {
+    max-width: 200px;
+    margin-top: 5px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.message audio::-webkit-media-controls-panel {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.message .audio-timestamp {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+}
+
+/* Make audio messages more compact */
+.message .text:has(audio) {
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+#stop-audio {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Media message styling */
+.message .message-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.message video {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
+.message audio {
+    width: 200px;
+    margin-top: 5px;
+}
+
+.media-timestamp {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 4px;
+}
+
+/* Add loading animation */
+.message.sending {
+    opacity: 0.7;
+}
+
+.message.sending::after {
+    content: 'Sending...';
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Add these styles for image messages */
+.message-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.message-image:hover {
+    transform: scale(1.05);
+}
+
+/* Image modal styles */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.image-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+} 

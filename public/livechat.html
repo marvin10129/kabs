@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabs Promotions - Live Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add additional styles for the header */
+        .chat-header {
+            background: linear-gradient(to right, #8B0000, #800080);
+            color: #FFD700;
+            padding: 15px;
+            text-align: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .chat-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* Update chat container to accommodate header */
+        .chat-container {
+            margin: 20px auto;
+        }
+
+        /* Update profile modal styling */
+        #profile-modal {
+            background: linear-gradient(to bottom, #8B0000, #800080);
+            color: #fff;
+            z-index: 1000;
+        }
+
+        #profile-modal h3 {
+            color: #FFD700;
+            margin-bottom: 20px;
+        }
+
+        #profile-modal button {
+            background: #FFD700;
+            color: #8B0000;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .online-users {
+            padding: 10px 15px;
+            background: rgba(139, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .typing-indicator {
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Profile Setup Modal -->
+    <div id="profile-modal">
+        <h3>Set Up Your Profile</h3>
+        <img id="profile-pic-preview" src="/default-avatar.png" alt="Profile Picture">
+        <form id="profile-form" enctype="multipart/form-data">
+            <input type="file" id="profile-pic-input" name="profilePic" accept="image/*">
+            <input type="text" id="username-input" name="username" placeholder="Enter username" required>
+            <button type="submit">Join Chat</button>
+        </form>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-header">
+            <a href="index.html" class="back-button">←</a>
+            <h1>Kabs Promotions Chat</h1>
+        </div>
+        
+        <div class="online-users" id="online-users">
+            Online Users: 0
+        </div>
+
+        <div class="messages" id="messages"></div>
+        
+        <div class="typing-indicator" id="typing-indicator"></div>
+        
+        <div class="input-area">
+            <button id="attach-btn">📎</button>
+            <button id="audio-btn">🎤</button>
+            <input type="text" id="message-input" placeholder="Type a message...">
+            <button id="send-btn">➤</button>
+        </div>
+    </div>
+
+    <!-- Add audio recording status -->
+    <div id="audio-status" class="audio-status" style="display: none;">
+        Recording... <span id="recording-time">0:00</span>
+        <button id="stop-audio">Stop</button>
+    </div>
+
+    <!-- Socket.IO -->
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
