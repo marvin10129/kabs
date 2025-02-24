@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kabs Promotions - Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #8B0000, #800080);
+      color: #fff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding: 20px;
+      animation: background-shift 10s infinite alternate;
+    }
+
+    @keyframes background-shift {
+      0% { background: linear-gradient(to bottom, #8B0000, #800080); }
+      50% { background: linear-gradient(to bottom, #800080, #4B0082); }
+      100% { background: linear-gradient(to bottom, #4B0082, #8B0000); }
+    }
+
+    header {
+      padding: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #FFD700;
+      margin: 0;
+      animation: color-shift 5s infinite alternate;
+    }
+
+    @keyframes color-shift {
+      0% { color: #FFD700; }
+      50% { color: #FF6347; }
+      100% { color: #FFD700; }
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-style: italic;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .hero-section h2 {
+      font-size: 3.5rem;
+      color: #FFD700;
+      margin-bottom: 10px;
+    }
+
+    .hero-section p {
+      font-size: 1.6rem;
+      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    .containers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 15px;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+      transition: transform 0.4s, background 0.3s;
+    }
+
+    .container:hover {
+      transform: translateY(-15px);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .container h3 {
+      font-size: 2rem;
+      color: #FFD700;
+      margin-bottom: 15px;
+    }
+
+    .container img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      background: #FFD700;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .container button {
+      font-size: 1.3rem;
+      background: linear-gradient(to right, #FFD700, #FF6347);
+      color: #8B0000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+
+    .container button:hover {
+      background: linear-gradient(to right, #FF6347, #FFD700);
+    }
+
+    footer {
+      padding: 20px;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="greeting">Welcome to Kabs Promotions</h1>
+    <p>Linking Lives Globally Through Innovation and Entertainment</p>
+  </header>
+
+  <div class="hero-section">
+    <h2>Your Journey Begins Here</h2>
+    <p>
+      Join us as we connect communities, inspire change, and create unforgettable experiences
+      through our events, interactive gaming, and live communication tools.
+    </p>
+  </div>
+
+  <div class="containers">
+    <div class="container">
+      <img src="https://kabspromotions.com/wp-content/uploads/2025/01/web.webp" alt="Website Icon">
+      <h3>Explore Website</h3>
+      <p>Discover the latest events and promotions.</p>
+      <button onclick="location.href='https://kabspromotions.com/home/';">Visit Website</button>
+    </div>
+
+    <div class="container">
+      <img src="https://kabspromotions.com/wp-content/uploads/2025/01/chat.webp" alt="Chat Icon">
+      <h3>Live Chat</h3>
+      <p>Connect with others in real-time.</p>
+      <button onclick="location.href='public/livechat.html'">Join Chat</button>
+    </div>
+
+    <div class="container">
+      <img src="https://kabspromotions.com/wp-content/uploads/2025/01/game.webp" alt="Gaming Icon">
+      <h3>Interactive Gaming</h3>
+      <p>Play exciting games and win rewards.</p>
+      <button onclick="location.href='https://kabspromotions.com/tikspin/';">Spin Now</button>
+    </div>
+
+    <div class="container">
+      <img src="https://kabspromotions.com/wp-content/uploads/2025/01/DALL·E-2025-01-28-14.24.50-A-sleek-modern-and-vibrant-icon-representing-a-shop-featuring-a-shopping-bag-with-handles-in-gold-and-red-hues-set-against-a-clean-white-circular-.webp" alt="Shop Icon">
+      <h3>Shop</h3>
+      <p>Browse and buy exclusive merchandise.</p>
+      <button onclick="location.href='https://kabspromotions.com/shop-2/';">Visit Shop</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Kabs Promotions. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function getGreeting() {
+      const hours = new Date().getHours();
+      if (hours < 12) {
+        return "Good Morning!";
+      } else if (hours < 18) {
+        return "Good Afternoon!";
+      } else {
+        return "Good Evening!";
+      }
+    }
+
+    document.getElementById("greeting").textContent = getGreeting() + " Welcome to Kabs Promotions";
+  </script>
+</body>
+</html>
