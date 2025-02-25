@@ -10,7 +10,11 @@ let recordingStartTime = null;
 
 // Connect to Socket.IO
 function connectSocket() {
-    socket = io(window.location.origin, {
+    const serverUrl = window.location.hostname === 'localhost' 
+        ? 'http://localhost:3000'
+        : 'https://' + window.location.hostname;
+        
+    socket = io(serverUrl, {
         transports: ['websocket', 'polling'],
         reconnection: true,
         reconnectionAttempts: 5,
@@ -32,13 +36,15 @@ async function loadPreviousMessages() {
     try {
         const response = await fetch('/api/messages');
         if (!response.ok) {
-            throw new Error('Failed to load messages');
+            const data = await response.json();
+            throw new Error(data.error || 'Failed to load messages');
         }
         const messages = await response.json();
+        console.log(`Loaded ${messages.length} messages`);
         messages.forEach(addMessage);
     } catch (error) {
         console.error('Error loading messages:', error);
-        handleError('Failed to load previous messages');
+        handleError('Failed to load previous messages: ' + error.message);
     }
 }
 
@@ -74,18 +80,18 @@ document.getElementById('profile-form').addEventListener('submit', async (e) => 
 
         const response = await fetch('/api/users', {
             method: 'POST',
-            body: formData  // This will include both username and profile pic
+            body: formData
         });
 
+        const data = await response.json();
+        
         if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Failed to save profile');
+            throw new Error(data.error || 'Failed to save profile');
         }
 
-        currentUser = await response.json();
+        currentUser = data;
         console.log('Profile saved successfully:', currentUser);
         
-        // Hide modal and connect socket
         document.getElementById('profile-modal').style.display = 'none';
         socket.emit('user_join', currentUser._id);
 
@@ -197,7 +203,22 @@ document.getElementById('message-input').addEventListener('input', () => {
 
 // Error handling
 function handleError(message) {
-    alert(message);
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    errorDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff4444;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        z-index: 1000;
+    `;
+    document.body.appendChild(errorDiv);
+    setTimeout(() => errorDiv.remove(), 5000);
 }
 
 // Setup Event Listeners
